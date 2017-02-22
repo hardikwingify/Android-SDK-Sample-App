@@ -279,18 +279,18 @@ public class CreditDebitFragment extends Fragment implements GetOfferStatusApiLi
                         image = getIssuerImage(issuer);
                         cardImage.setImageResource(image);
 
-                        if(issuer == "AMEX")
+                        if(issuer.equals("AMEX"))
                             cardCvvEditText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(4)});
                         else
                             cardCvvEditText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(3)});
-                        if(issuer == "SMAE" || issuer == "MAES") {
+                        if(issuer.equals("SMAE") || issuer.equals("MAES")) {
                             cardNumberEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(23)});
                             cardLength = 23;
-                        }else if(issuer == "AMEX"){
+                        }else if(issuer.equals("AMEX")){
                             cardNumberEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(18)});
                             cardLength = 18;
                         }
-                        else if(issuer == "DINR"){
+                        else if(issuer.equals("DINR")){
                             cardNumberEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(17)});
                             cardLength = 17;
                         }
@@ -399,12 +399,12 @@ public class CreditDebitFragment extends Fragment implements GetOfferStatusApiLi
                 cvv = charSequence.toString();
                 if (payuUtils.validateCvv(cardNumberEditText.getText().toString().replace(" ",""), cvv)) {
                     if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                    cvvImage.setAlpha((float)1);
+                        cvvImage.setAlpha((float)1);
                     isCvvValid = true;
                     uiValidation();
                 } else{
                     if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                    cvvImage.setAlpha((float)0.5);
+                        cvvImage.setAlpha((float)0.5);
                     isCvvValid = false;
                     uiValidation();
                 }
@@ -493,7 +493,7 @@ public class CreditDebitFragment extends Fragment implements GetOfferStatusApiLi
         else if(payuUtils.validateCardNumber(cardNumberEditText.getText().toString().replace(" ", "")) && cardNumberEditText.length() > 0){
             isCardNumberValid = true;
             if(mPaymentParams.getOfferKey() != null && null != mPaymentParams.getUserCredentials())
-            getOfferStatus();
+                getOfferStatus();
 //            uiValidation();
         }else{
             isCardNumberValid = false;
@@ -533,7 +533,7 @@ public class CreditDebitFragment extends Fragment implements GetOfferStatusApiLi
 
     public void uiValidation(){
 
-        if(issuer == "SMAE"){
+        if(issuer.equals("SMAE")){
 
             isCvvValid = true;
             isExpiryMonthValid = true;
@@ -546,7 +546,7 @@ public class CreditDebitFragment extends Fragment implements GetOfferStatusApiLi
         }
         else {
             if(viewpager.getCurrentItem() == fragmentPosition)
-            getActivity().findViewById(R.id.button_pay_now).setEnabled(false);
+                getActivity().findViewById(R.id.button_pay_now).setEnabled(false);
         }
 
     }
