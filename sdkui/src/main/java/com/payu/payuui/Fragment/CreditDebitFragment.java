@@ -279,18 +279,18 @@ public class CreditDebitFragment extends Fragment implements GetOfferStatusApiLi
                         image = getIssuerImage(issuer);
                         cardImage.setImageResource(image);
 
-                        if(issuer.equals("AMEX"))
+                        if(issuer == "AMEX")
                             cardCvvEditText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(4)});
                         else
                             cardCvvEditText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(3)});
-                        if(issuer.equals("SMAE") || issuer.equals("MAES")) {
+                        if(issuer == "SMAE" || issuer == "MAES") {
                             cardNumberEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(23)});
                             cardLength = 23;
-                        }else if(issuer.equals("AMEX")){
+                        }else if(issuer == "AMEX"){
                             cardNumberEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(18)});
                             cardLength = 18;
                         }
-                        else if(issuer.equals("DINR")){
+                        else if(issuer == "DINR"){
                             cardNumberEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(17)});
                             cardLength = 17;
                         }
@@ -533,7 +533,7 @@ public class CreditDebitFragment extends Fragment implements GetOfferStatusApiLi
 
     public void uiValidation(){
 
-        if(issuer.equals("SMAE")){
+        if(issuer == "SMAE"){
 
             isCvvValid = true;
             isExpiryMonthValid = true;
@@ -554,7 +554,7 @@ public class CreditDebitFragment extends Fragment implements GetOfferStatusApiLi
     @Override
     public void onGetOfferStatusApiResponse(PayuResponse payuResponse) {
 
-        if(getActivity()!= nulgit l && payuResponse.getPayuOffer().getDiscount() != null ) {
+        if(getActivity()!= null && payuResponse.getPayuOffer().getDiscount() != null ) {
             Toast.makeText(getActivity(), "Response status: " + payuResponse.getResponseStatus().getResult() + ": Discount = " + payuResponse.getPayuOffer().getDiscount(), Toast.LENGTH_LONG).show();
 
 
